@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Masuk | Segara.AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#006591",
+                      "background": "#f9f9f9",
+                      "primary-fixed": "#c9e6ff",
+                      "outline": "#6e7882",
+                      "primary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#004c6e",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#2c1700",
+                      "tertiary-fixed": "#ffdcbc",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f3f3f4",
+                      "secondary-fixed-dim": "#aec6ff",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-background": "#1a1c1c",
+                      "on-surface": "#1a1c1c",
+                      "secondary": "#0058bf",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "tertiary": "#885200",
+                      "surface-bright": "#f9f9f9",
+                      "on-primary-fixed": "#001e2f",
+                      "surface-container-high": "#e8e8e8",
+                      "tertiary-container": "#f09408",
+                      "inverse-on-surface": "#f0f1f1",
+                      "on-primary-container": "#004361",
+                      "secondary-fixed": "#d8e2ff",
+                      "on-surface-variant": "#3e4851",
+                      "tertiary-fixed-dim": "#ffb86a",
+                      "surface-dim": "#dadada",
+                      "inverse-surface": "#2f3131",
+                      "on-error": "#ffffff",
+                      "outline-variant": "#bdc8d2",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "on-secondary-container": "#fefcff",
+                      "primary-container": "#00b4ff",
+                      "secondary-container": "#006fef",
+                      "surface": "#f9f9f9",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container": "#eeeeee",
+                      "inverse-primary": "#89ceff",
+                      "on-tertiary-container": "#5b3500",
+                      "on-secondary-fixed": "#001a42",
+                      "on-error-container": "#93000a",
+                      "primary": "#006591",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#004396"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Sora"],
+                      "display": ["Sora"],
+                      "body": ["Hanken Grotesk"],
+                      "label": ["JetBrains Mono"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; background-color: #f9f9f9; overflow: hidden; }
+        .font-headline { font-family: 'Sora', sans-serif; }
+        .font-label { font-family: 'JetBrains Mono', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .animate-subtle-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(0, 180, 255, 0.4);
+        }
+        .maritime-overlay {
+            background: linear-gradient(135deg, rgba(0, 101, 145, 0.1) 0%, rgba(0, 180, 255, 0.05) 100%);
+        }
+    </style>
+</head>
+<body class="text-on-surface h-screen w-full flex">
+<!-- Close/Back Button -->
+<a href="index.html" onclick="if(document.referrer) { event.preventDefault(); window.history.back(); }" class="fixed top-5 right-5 w-11 h-11 rounded-full bg-white flex items-center justify-center text-primary hover:bg-primary hover:text-white active:scale-95 transition-all duration-300 shadow-lg border-2 border-primary/20 z-[200]" aria-label="Kembali">
+    <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 0, 'opsz' 24;">close</span>
+</a>
+<!-- Left Visual Section (Desktop Only) -->
+<section class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-surface-container-low border-r border-outline-variant/30">
+<!-- Main Maritime Visual -->
+<div class="absolute inset-0 w-full h-full">
+<img alt="Maritime Intelligence" class="w-full h-full object-cover brightness-[0.95] contrast-[1.05]" data-alt="A cinematic, wide-angle shot of a state-of-the-art autonomous cargo vessel navigating a calm, azure ocean during dawn. Holographic digital overlays of navigation paths, wind vectors, and sonar data are subtly projected over the water surface in glowing bright blue and cyan. The scene is illuminated by the soft, diffused light of the morning sun, creating a high-key light-mode aesthetic that communicates advanced maritime technology and absolute precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBosOKSyFL35W1Xua5xzGxaAokU4NSQzShnNptiAn_OLIUM9MvfIwML8BNSARex-ME2XwUpzKfrehKcUBMmjwEQS31yId7GtTRZIDOe0j304NkheOLQUIFwXRbVtiBykfzpWOg-6lx8khet0mPtJuIdfIdLHSOWtRAvzkFThdy4QHfotpht-TOe1cASVEv2KrDNV-pOwwd2_qwgvQPHxhVVZ8hKXkAYMEkKWztza2UlW7ych5u-0yFNSVhY6yYoxYbD4eP1hZ6E1Cs">
+</div>
+<!-- Decorative HUD Elements -->
+<div class="absolute inset-0 maritime-overlay pointer-events-none"></div>
+
+<!-- Floating Data Cards -->
+<div class="absolute bottom-24 left-12 right-12 z-10 grid grid-cols-2 gap-6">
+<div class="glass-panel p-6 rounded-xl animate-subtle-float">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label text-label-sm text-primary uppercase">Status Armada</span>
+<span class="material-symbols-outlined text-primary-container">shield_locked</span>
+</div>
+<p class="font-headline text-headline-sm font-bold text-on-surface">Terhubung</p>
+<div class="mt-2 w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-3/4 animate-pulse"></div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl animate-subtle-float" style="animation-delay: 1s;">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label text-label-sm text-primary uppercase">Optimasi AI</span>
+<span class="material-symbols-outlined text-primary-container">insights</span>
+</div>
+<p class="font-headline text-headline-sm font-bold text-on-surface">98.4%</p>
+<p class="text-body-sm text-on-surface-variant">Efisiensi Bahan Bakar</p>
+</div>
+</div>
+<!-- Background Abstract Pattern -->
+<div class="absolute -bottom-20 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="absolute top-1/4 -right-20 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl"></div>
+</section>
+<!-- Right Login Form Section -->
+<section class="w-full lg:w-1/2 h-full bg-surface-container-lowest flex flex-col justify-center px-8 md:px-24 lg:px-32 relative">
+
+<div class="max-w-md w-full mx-auto">
+<div class="mb-10">
+<h2 class="font-headline text-headline-md font-bold text-on-surface mb-2 tracking-tight">Selamat Datang Kembali</h2>
+<p class="text-body-md text-on-surface-variant">Akses dashboard navigasi cerdas Anda hari ini.</p>
+</div>
+<!-- Login Form -->
+<form action="#" class="space-y-6">
+<div class="space-y-1.5">
+<label class="font-label text-label-sm text-on-surface-variant uppercase tracking-wider" for="email">Email Bisnis</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg transition-colors group-focus-within:text-primary">mail</span>
+<input class="w-full pl-11 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300 text-body-md placeholder:text-outline-variant" id="email" name="email" placeholder="nama@perusahaan.com" required="" type="email">
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label text-label-sm text-on-surface-variant uppercase tracking-wider" for="password">Password</label>
+<a class="font-label text-label-sm text-primary hover:underline transition-all" href="#">Lupa Password?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg transition-colors group-focus-within:text-primary">lock</span>
+<input class="w-full pl-11 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-300 text-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required="" type="password">
+</div>
+</div>
+<button class="glow-button w-full bg-primary text-on-primary py-4 rounded-lg font-headline font-bold text-body-md transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                    Masuk ke Segara
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-10">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/50"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-4 bg-surface-container-lowest text-on-surface-variant font-label text-label-sm uppercase tracking-widest">Atau Masuk Dengan</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-3 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors duration-300 font-label text-label-sm text-on-surface">
+<svg class="w-5 h-5" viewBox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Google
+                </button>
+<button class="flex items-center justify-center gap-3 py-3 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors duration-300 font-label text-label-sm text-on-surface">
+<svg class="w-5 h-5" viewBox="0 0 24 24">
+<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" fill="#0077B5"></path>
+</svg>
+                    LinkedIn
+                </button>
+</div>
+<!-- Footer Link -->
+<div class="mt-12 text-center">
+<p class="text-body-md text-on-surface-variant">
+                    Belum memiliki akun? 
+                    <a class="text-primary font-bold hover:text-secondary transition-colors underline-offset-4 decoration-primary/30" href="daftar.html">Daftar Sekarang</a>
+</p>
+</div>
+</div>
+
+</section>
+<!-- Floating Micro-interaction Script -->
+<script>
+        document.addEventListener('mousemove', (e) => {
+            const panels = document.querySelectorAll('.glass-panel');
+            const x = (window.innerWidth / 2 - e.pageX) / 40;
+            const y = (window.innerHeight / 2 - e.pageY) / 40;
+            
+            panels.forEach(panel => {
+                panel.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Form Focus Effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'translateY(-2px)';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>
+

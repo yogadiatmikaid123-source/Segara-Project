@@ -1,0 +1,722 @@
+<!DOCTYPE html><html class="light" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Segara.AI | Interactive Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        :root {
+            --glass-border: rgba(0, 101, 145, 0.1);
+        }
+        body {
+            background: #f7f9fb;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        .surface-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+        }
+        .data-glow-border:hover {
+            border-color: #006591;
+            box-shadow: 0 4px 20px rgba(0, 101, 145, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes pulse-glow {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes shimmer-glitch {
+            0% { transform: translateX(-100%); opacity: 0; }
+            20% { opacity: 0.5; }
+            40% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .shimmer-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.15), transparent);
+            animation: shimmer-glitch 2s infinite;
+        }
+        @keyframes marker-pulse {
+            0% { transform: scale(0.8); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 101, 145, 0.4); }
+            70% { transform: scale(1.2); opacity: 0.5; box-shadow: 0 0 0 10px rgba(0, 101, 145, 0); }
+            100% { transform: scale(0.8); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 101, 145, 0); }
+        }
+        .map-marker-pulse {
+            animation: marker-pulse 2s infinite;
+        }
+        @keyframes alert-flash {
+            0%, 100% { border-color: rgba(186, 26, 26, 0.2); }
+            50% { border-color: rgba(186, 26, 26, 1); box-shadow: 0 0 15px rgba(186, 26, 26, 0.3); }
+        }
+        .anomaly-alert-active {
+            animation: alert-flash 1.5s infinite;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bdc8d2;
+            border-radius: 10px;
+        }
+
+        /* Interactive Map Styles */
+        #map-container {
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+        }
+        #map-container:active {
+            cursor: grabbing;
+        }
+        .vessel-ship {
+            transition: transform 1.5s linear, opacity 0.3s ease;
+        }
+        .vessel-ship:hover {
+            filter: brightness(1.2);
+            scale: 1.2;
+        }
+        /* Mobile menu overlay */
+        .mobile-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .mobile-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fb",
+                        "outline": "#6e7882",
+                        "inverse-primary": "#89ceff",
+                        "surface-tint": "#006591",
+                        "surface-dim": "#d8dadc",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bdc8d2",
+                        "on-primary-container": "#004361",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#001e2f",
+                        "on-surface": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#ffb86a",
+                        "tertiary": "#885200",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3e4851",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#00b4ff",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-secondary-fixed": "#131b2e",
+                        "secondary": "#565e74",
+                        "primary-fixed": "#c9e6ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-background": "#191c1e",
+                        "primary": "#006591",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-container": "#5b3500",
+                        "secondary-container": "#dae2fd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#5c647a",
+                        "tertiary-container": "#f09408",
+                        "primary-fixed-dim": "#89ceff",
+                        "tertiary-fixed": "#ffdcbc",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-md": ["Sora"],
+                        "label-sm": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.0", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-on-surface font-body-md selection:bg-primary/20 loaded">
+<!-- TopNavBar -->
+<header class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-outline-variant/20 h-20 transition-all duration-500">
+<nav class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<a class="font-headline-md text-headline-md font-extrabold text-primary tracking-tighter z-[110]" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<div class="hidden lg:flex items-center gap-stack-lg">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html">Beranda</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="solusi.html">Solusi</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="teknologi.html">Teknologi</a>
+<a class="font-label-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Demo</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="tentang-kami.html">Tentang Kami</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+</div>
+<div class="flex items-center gap-6 z-[110]">
+<a href="masuk.html" class="hidden lg:block text-primary font-label-md hover:text-on-primary-fixed transition-colors">Masuk</a>
+<a href="daftar.html" class="hidden lg:inline-block bg-primary text-on-primary px-8 py-2.5 rounded-full font-label-md font-bold active:scale-95 hover:bg-on-primary-fixed duration-300 transition-all shadow-md hover:shadow-primary/20 text-center">Daftar</a>
+<button aria-label="Toggle menu" class="lg:hidden text-primary flex items-center justify-center p-2 relative z-[110]" id="mobile-menu-toggle">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay fixed inset-0 bg-black/60 z-[100] lg:hidden" id="mobile-overlay"></div>
+<!-- Mobile Menu Drawer -->
+<div class="fixed top-0 right-0 h-full w-full max-w-[300px] bg-white z-[110] shadow-2xl flex flex-col p-6 lg:hidden translate-x-full transition-transform duration-300" id="mobile-menu">
+<div class="flex justify-between items-center mb-10">
+<a class="font-headline-md text-headline-sm font-extrabold text-primary tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<button aria-label="Close menu" class="p-2 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center cursor-pointer" id="mobile-menu-close">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="index.html">Beranda</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="solusi.html">Solusi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="teknologi.html">Teknologi</a>
+<a class="text-2xl font-bold text-primary transition-link py-2 border-b border-primary" href="#">Demo</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="tentang-kami.html">Tentang Kami</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+<div class="h-px bg-outline-variant/30 my-2"></div>
+<a class="text-2xl font-bold text-primary transition-link py-2" href="masuk.html">Masuk</a>
+</div>
+<div class="mt-auto pt-4">
+<a href="daftar.html" class="w-full py-4 bg-primary text-on-primary rounded-full font-bold text-center block">Daftar</a>
+</div>
+</div>
+<main class="max-w-container-max mx-auto px-gutter pt-24 pb-stack-lg">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack-lg gap-4">
+<div>
+<span class="font-label-sm text-primary uppercase tracking-widest mb-2 block">Sistem Pemantauan Real-time</span>
+<h1 class="font-headline-lg text-on-surface">Maritime Command Center</h1>
+</div>
+<div class="flex items-center gap-stack-md bg-surface-container rounded-xl p-2 border border-outline-variant">
+<div class="flex items-center gap-2 px-3 py-1 border-r border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse-glow shadow-[0_0_8px_rgba(34,197,94,0.3)]"></span>
+<span class="font-label-sm text-on-surface-variant uppercase">Sistem: Online</span>
+</div>
+<div class="px-3">
+<span class="font-label-md text-primary font-mono" id="current-time">01:09:40 UTC</span>
+</div>
+</div>
+</div>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-stack-md">
+<!-- Left Panel: Stats -->
+<aside class="md:col-span-3 flex flex-col gap-stack-md">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-on-surface-variant uppercase">Suhu Permukaan</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">thermostat</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-headline-md text-on-surface count-up" data-decimals="1" data-target="28.4" id="temp-val">28.4</span>
+<span class="text-primary font-label-md mb-1">°C</span>
+</div>
+<div class="mt-4 h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] transition-all duration-1000 ease-out" id="temp-progress"></div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-on-surface-variant uppercase">Kecepatan Angin</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">air</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-headline-md text-on-surface count-up" data-decimals="1" data-target="12.8" id="wind-val">12.8</span>
+<span class="text-primary font-label-md mb-1">KNOTS</span>
+</div>
+<div class="mt-4 h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[40%] transition-all duration-1000 ease-out" id="wind-progress"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant hover:border-primary/50 hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-on-surface-variant uppercase">Kapal Aktif</span>
+<span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">directions_boat</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-headline-md text-on-surface count-up" data-decimals="0" data-target="1248" id="vessel-val">1248</span>
+<span class="text-primary font-label-md mb-1">VESSELS</span>
+</div>
+<div class="mt-4 flex gap-1 items-center">
+<span class="material-symbols-outlined text-green-600 text-sm">trending_up</span>
+<span class="text-green-600 font-label-sm">+4% vs kemarin</span>
+</div>
+</div>
+<!-- AIS Anomaly Log -->
+<div class="bg-surface-container-lowest rounded-xl flex-grow overflow-hidden flex flex-col border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<span class="font-label-sm text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm animate-pulse">warning</span>
+                        AIS Anomaly Feed
+                    </span>
+<span class="px-2 py-0.5 rounded bg-error text-[10px] text-on-error font-bold animate-pulse">LIVE</span>
+</div>
+<div class="p-4 space-y-4 overflow-y-auto max-h-[350px]" id="anomaly-log">
+<div class="border-l-4 border-error pl-3 py-2 bg-error/5 shimmer-effect rounded-r-lg group cursor-pointer hover:bg-error/10 transition-colors anomaly-alert-active" onclick="vesselDetails.show('KM. SILENT-HUNTER', 'Fishing', 'AIS Signal Lost', '4.2 kn', 'Drifting', '92')">
+<div class="flex justify-between items-start mb-1">
+<p class="font-label-sm text-error font-bold uppercase tracking-tighter">Critical: Dark Vessel</p>
+<span class="text-[9px] text-on-surface-variant font-mono">14:22:10</span>
+</div>
+<p class="text-body-md text-sm text-on-surface leading-tight">KM. SILENT-HUNTER (MMSI: 2341029) AIS transmisi terputus di sektor Selat Malaka.</p>
+<div class="mt-2 flex gap-2">
+<span class="text-[10px] bg-error/20 text-error px-1.5 py-0.5 rounded">Spoofing Risk</span>
+<span class="text-[10px] text-primary underline">Lihat Detail</span>
+</div>
+</div>
+<div class="border-l-4 border-tertiary-container pl-3 py-2 bg-tertiary-container/5 rounded-r-lg group cursor-pointer hover:bg-tertiary-container/10 transition-colors" onclick="vesselDetails.show('MV. OCEAN_BLUE', 'Cargo', 'Route Deviation', '15.4 kn', '145°', '88')">
+<div class="flex justify-between items-start mb-1">
+<p class="font-label-sm text-tertiary font-bold uppercase tracking-tighter">Warning: Route Deviation</p>
+<span class="text-[9px] text-on-surface-variant font-mono">14:15:42</span>
+</div>
+<p class="text-body-md text-sm text-on-surface leading-tight">MV. OCEAN_BLUE menyimpang 15° dari jalur reguler di Laut Natuna Utara.</p>
+<span class="text-[10px] text-on-surface-variant font-label-sm mt-1 block">A.I Confidence: 88%</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center Panel: Interactive Map -->
+<section class="md:col-span-9 relative rounded-2xl overflow-hidden min-h-[600px] border border-outline-variant group shadow-md bg-surface-container" id="map-viewport">
+<div class="absolute inset-0 transition-transform duration-75 origin-center" id="map-container">
+<img alt="Interactive Maritime Map" class="w-[200%] h-[200%] max-w-none object-cover opacity-80 mix-blend-multiply translate-x-[-25%] translate-y-[-25%]" id="main-map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0zU7Veteyziic1VIJpRd6dgNiI1OrPPFCavOeIi8YLDtzxF6zpo7SVNvdPPSGH_aLZL5tV1JuHF8-uJJ1UyoWloITuIKkMpzxXxzF2RkrmjQbs6_qIwX7QBU7jsvwOaGY6hW3D_e4HgjtOQTcdwlwTptmujWuyLtZdbiY9pn2DH73hhdNAyE7efT_1SXVj4hwL02T0HbN45z22N9pOMUs9WJ4b-1rPUDDdY2hFQ7FRTVfRagVakhoRUT3asUPoRCHJx1ALGN96KA">
+<div class="absolute inset-0 pointer-events-none" id="ships-layer">
+<!-- Vessels will be injected here via JS -->
+</div>
+</div>
+<div class="absolute top-6 right-6 flex flex-col gap-2 z-20">
+<button class="bg-surface-container-lowest/90 backdrop-blur w-12 h-12 flex items-center justify-center rounded-xl border border-outline-variant hover:bg-primary hover:text-on-primary transition-all active:scale-90 shadow-sm" id="zoom-in">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="bg-surface-container-lowest/90 backdrop-blur w-12 h-12 flex items-center justify-center rounded-xl border border-outline-variant hover:bg-primary hover:text-on-primary transition-all active:scale-90 shadow-sm" id="zoom-out">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<div class="h-px bg-outline-variant/30 mx-2 my-1"></div>
+<button class="bg-surface-container-lowest/90 backdrop-blur w-12 h-12 flex items-center justify-center rounded-xl border border-outline-variant hover:bg-primary hover:text-on-primary transition-all active:scale-90 shadow-sm">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+<!-- Analysis Sidebar -->
+<div class="absolute top-4 right-20 w-80 bg-surface-container-lowest/95 backdrop-blur-xl border border-outline-variant rounded-2xl shadow-2xl z-30 transition-all duration-300 translate-x-[calc(100%+100px)] opacity-0" id="vessel-sidebar">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h2 class="font-headline-md text-lg text-on-surface" id="v-name">Vessel Name</h2>
+<p class="text-on-surface-variant text-xs font-label-md uppercase tracking-widest" id="v-type">Type</p>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors" id="close-sidebar">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-surface-container rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant font-label-sm uppercase">Current Speed</p>
+<p class="font-bold text-on-surface" id="v-speed">-- kn</p>
+</div>
+</div>
+<div class="p-3 bg-surface-container rounded-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">navigation</span>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant font-label-sm uppercase">Heading</p>
+<p class="font-bold text-on-surface" id="v-heading">--°</p>
+</div>
+</div>
+<div class="p-4 border-l-4 border-error bg-error/5 rounded-r-xl">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] text-error font-bold uppercase">Anomaly Score</span>
+<span class="text-lg font-headline-md text-error" id="v-score">--%</span>
+</div>
+<p class="text-xs text-on-surface leading-snug" id="v-status">Detection status...</p>
+</div>
+</div>
+<div class="mt-8 flex gap-2">
+<button class="flex-1 py-2.5 bg-primary text-on-primary rounded-lg text-sm font-bold shadow-md active:scale-95 transition-all">Track</button>
+<button class="flex-1 py-2.5 border border-outline-variant text-on-surface rounded-lg text-sm font-bold hover:bg-surface-container transition-all">Historical</button>
+</div>
+</div>
+</div>
+<!-- Map Bottom HUD -->
+<div class="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row justify-between items-center md:items-end gap-4 pointer-events-none z-10">
+<div class="bg-surface-container-lowest/90 backdrop-blur p-4 rounded-xl flex items-center gap-6 border-l-4 border-primary shadow-lg border border-outline-variant pointer-events-auto">
+<div>
+<p class="font-label-sm text-on-surface-variant mb-1 uppercase text-[10px] tracking-widest">Sektor Terpantau</p>
+<p class="font-headline-md text-lg text-on-surface">Selat Malaka &amp; Riau</p>
+</div>
+<div class="h-10 w-px bg-outline-variant"></div>
+<div>
+<p class="font-label-sm text-on-surface-variant mb-1 uppercase text-[10px] tracking-widest">Kepadatan AIS</p>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-primary">MEDIUM</span>
+<div class="flex gap-0.5">
+<div class="w-1.5 h-3 bg-primary rounded-full"></div>
+<div class="w-1.5 h-3 bg-primary rounded-full"></div>
+<div class="w-1.5 h-3 bg-outline-variant rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest/90 backdrop-blur p-2 rounded-xl flex gap-1 border border-outline-variant shadow-lg pointer-events-auto">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md text-xs transition-all active:scale-95 shadow-sm">Standard</button>
+<button class="px-4 py-2 hover:bg-surface-container text-on-surface-variant rounded-lg font-label-md text-xs transition-all active:scale-95">Satellite</button>
+<button class="px-4 py-2 hover:bg-error/10 text-error rounded-lg font-label-md text-xs transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                        A.I Anomaly
+                    </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Lower Analytics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mt-stack-md">
+<!-- Analytics Chart -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl col-span-1 md:col-span-2 border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-on-surface font-headline-md text-base">Analitik Trafik 24 Jam</h3>
+<p class="text-on-surface-variant font-label-sm text-xs">Deteksi anomali rute meningkat 12% pagi ini</p>
+</div>
+<select class="bg-surface-container border border-outline-variant rounded-lg text-xs font-label-sm text-on-surface-variant px-3 py-1 outline-none">
+<option>Terakhir 24 Jam</option>
+<option>Terakhir 7 Hari</option>
+</select>
+</div>
+<div class="h-48 w-full flex items-end justify-between gap-1">
+<div class="flex-grow bg-primary/20 h-[30%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[45%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[40%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[60%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[85%] rounded-t-sm"></div>
+<div class="flex-grow bg-error/40 h-[100%] rounded-t-sm border-t-2 border-error"></div>
+<div class="flex-grow bg-primary/20 h-[75%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[60%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[40%] rounded-t-sm"></div>
+<div class="flex-grow bg-primary/20 h-[30%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Detail List Section -->
+<div class="bg-surface-container-lowest p-stack-md rounded-xl border border-outline-variant shadow-sm transition-all hover:shadow-md">
+<h3 class="text-on-surface font-headline-md text-base mb-4">Daftar Kapal Prioritas</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container transition-all cursor-pointer border border-transparent hover:border-outline-variant" onclick="vesselDetails.show('Ever Given II', 'Container', 'Normal Movement', '9.2 kn', '122°', '12')">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary text-sm">anchor</span></div>
+<div><p class="text-sm font-bold text-on-surface">Ever Given II</p><p class="text-[10px] text-on-surface-variant font-label-sm">CONTAINER • 18k TEU</p></div>
+</div>
+<div class="text-right"><span class="text-xs font-label-md text-primary block">9.2m/s</span><span class="text-[9px] text-green-600 font-bold">Normal</span></div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-error/5 transition-all cursor-pointer border border-transparent hover:border-error/20" onclick="vesselDetails.show('Silent Hunter', 'Fishing', 'Critical Anomaly', '2.1 kn', 'Drifting', '92')">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error/10 flex items-center justify-center"><span class="material-symbols-outlined text-error text-sm">warning</span></div>
+<div><p class="text-sm font-bold text-on-surface">Silent Hunter</p><p class="text-[10px] text-on-surface-variant font-label-sm">FISHING • Unreg</p></div>
+</div>
+<div class="text-right"><span class="text-xs font-label-md text-error block">2.1m/s</span><span class="text-[9px] text-error font-bold uppercase animate-pulse">Critical</span></div>
+</div>
+</div>
+<button class="w-full mt-4 py-2.5 text-primary font-label-md border border-primary/30 rounded-lg hover:bg-primary/5 transition-all text-sm">Lihat Semua Data</button>
+</div>
+</div>
+</main>
+<footer class="bg-surface-container-high mt-stack-lg border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg px-gutter py-stack-lg max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<a class="font-headline-md font-bold text-primary mb-4 block" href="index.html">Segara.AI</a>
+<p class="text-on-surface-variant font-body-md text-sm mb-6">Masa depan keamanan maritim global dengan kecerdasan buatan terintegrasi dan deteksi anomali AIS presisi tinggi.</p>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface mb-4">Navigasi</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="index.html">Beranda</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="solusi.html">Solusi</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="teknologi.html">Teknologi</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="tentang-kami.html">Tentang Kami</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface mb-4">Dukungan</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="#">Pusat Bantuan</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary font-label-sm text-sm transition-all" href="#">Dokumentasi API</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface mb-4">Update Terbaru</h4>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant relative overflow-hidden group shadow-sm hover:border-primary/50 transition-colors">
+<p class="text-[10px] text-primary font-label-sm mb-1 uppercase tracking-wider">v2.4.0 Release</p>
+<p class="text-xs text-on-surface-variant">Peningkatan algoritma deteksi dark vessel menggunakan machine learning.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Navigation Functions
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function openMenu() {
+        mobileMenu.classList.remove('translate-x-full');
+        if (mobileOverlay) mobileOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.add('translate-x-full');
+        if (mobileOverlay) mobileOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    mobileMenuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openMenu();
+    });
+
+    mobileMenuClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeMenu();
+    });
+
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking links
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // Close menu when clicking outside the menu content
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.classList.contains('translate-x-full') && !mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Update Time Function
+    function updateTime() {
+        const timeElement = document.getElementById('current-time');
+        if (!timeElement) return;
+        const now = new Date();
+        timeElement.textContent = now.toISOString().split('T')[1].split('.')[0] + ' UTC';
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // --- INTERACTIVE MAP LOGIC ---
+    const mapViewport = document.getElementById('map-viewport');
+    const mapContainer = document.getElementById('map-container');
+    const shipsLayer = document.getElementById('ships-layer');
+    const sidebar = document.getElementById('vessel-sidebar');
+
+    let scale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX, startY;
+
+    // Pan Functionality
+    mapViewport.addEventListener('mousedown', (e) => {
+        if (e.target.closest('button') || e.target.closest('#vessel-sidebar')) return;
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        mapContainer.style.transition = 'none';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+        mapContainer.style.transition = 'transform 0.3s ease-out';
+    });
+
+    // Zoom Functionality
+    document.getElementById('zoom-in').addEventListener('click', () => { scale = Math.min(3, scale + 0.2); updateTransform(); });
+    document.getElementById('zoom-out').addEventListener('click', () => { scale = Math.max(0.5, scale - 0.2); updateTransform(); });
+
+    function updateTransform() {
+        mapContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    // --- ANIMATED SHIPS ---
+    const ships = [
+        { id: 1, name: 'KM. NUSANTARA IV', type: 'Cargo', x: 35, y: 30, color: '#006591', dx: 0.02, dy: 0.01, speed: '14.2 kn', heading: '122°', score: '04' },
+        { id: 2, name: 'SS. OCEAN VOYAGER', type: 'Tanker', x: 72, y: 65, color: '#565e74', dx: -0.015, dy: 0.005, speed: '11.5 kn', heading: '045°', score: '08' },
+        { id: 3, name: 'SILENT HUNTER', type: 'Fishing', x: 48, y: 42, color: '#ba1a1a', dx: 0, dy: 0, speed: '2.1 kn', heading: 'Drifting', score: '92', isAnomaly: true }
+    ];
+
+    function createShips() {
+        ships.forEach(ship => {
+            const shipEl = document.createElement('div');
+            shipEl.className = `absolute vessel-ship pointer-events-auto cursor-pointer group/pin`;
+            shipEl.style.left = `${ship.x}%`;
+            shipEl.style.top = `${ship.y}%`;
+            shipEl.id = `ship-${ship.id}`;
+            
+            const html = `
+                <div class="w-3 h-3 ${ship.isAnomaly ? 'bg-error' : 'bg-primary'} rounded-full relative shadow-lg"></div>
+                ${ship.isAnomaly ? `<div class="w-6 h-6 bg-error rounded-full absolute -inset-1.5 animate-ping opacity-30"></div>` : `<div class="w-3 h-3 ${ship.isAnomaly ? 'bg-error' : 'bg-primary'} rounded-full absolute inset-0 map-marker-pulse"></div>`}
+            `;
+            
+            shipEl.innerHTML = html;
+            shipEl.onclick = (e) => {
+                e.stopPropagation();
+                vesselDetails.show(ship.name, ship.type, ship.isAnomaly ? 'Critical Anomaly' : 'Normal Movement', ship.speed, ship.heading, ship.score);
+            };
+            shipsLayer.appendChild(shipEl);
+        });
+    }
+
+    function animateShips() {
+        ships.forEach(ship => {
+            if (ship.isAnomaly) return; // Don't move the drifting anomaly
+            ship.x += ship.dx;
+            ship.y += ship.dy;
+            
+            // Bounce logic for demo
+            if (ship.x > 95 || ship.x < 5) ship.dx *= -1;
+            if (ship.y > 95 || ship.y < 5) ship.dy *= -1;
+
+            const el = document.getElementById(`ship-${ship.id}`);
+            if (el) {
+                el.style.left = `${ship.x}%`;
+                el.style.top = `${ship.y}%`;
+            }
+        });
+        requestAnimationFrame(animateShips);
+    }
+
+    // --- SIDEBAR LOGIC ---
+    const vesselDetails = {
+        show: function(name, type, status, speed, heading, score) {
+            document.getElementById('v-name').textContent = name;
+            document.getElementById('v-type').textContent = type;
+            document.getElementById('v-status').textContent = status;
+            document.getElementById('v-speed').textContent = speed;
+            document.getElementById('v-heading').textContent = heading;
+            document.getElementById('v-score').textContent = score + '%';
+            
+            sidebar.classList.remove('translate-x-[calc(100%+100px)]', 'opacity-0');
+            sidebar.classList.add('translate-x-0', 'opacity-100');
+        },
+        hide: function() {
+            sidebar.classList.add('translate-x-[calc(100%+100px)]', 'opacity-0');
+            sidebar.classList.remove('translate-x-0', 'opacity-100');
+        }
+    };
+
+    document.getElementById('close-sidebar').onclick = vesselDetails.hide;
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('loaded');
+        createShips();
+        animateShips();
+        
+        // Count up animation
+        const countElements = document.querySelectorAll('.count-up');
+        countElements.forEach(el => {
+            const target = parseFloat(el.dataset.target);
+            const decimals = parseInt(el.dataset.decimals || 0);
+            let current = 0;
+            const inc = target / 60;
+            const timer = setInterval(() => {
+                current += inc;
+                if (current >= target) {
+                    el.textContent = target.toFixed(decimals);
+                    clearInterval(timer);
+                } else {
+                    el.textContent = current.toFixed(decimals);
+                }
+            }, 20);
+        });
+    });
+</script>
+</body></html>
+

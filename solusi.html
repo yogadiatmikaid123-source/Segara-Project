@@ -1,0 +1,486 @@
+<!DOCTYPE html><html lang="id" style=""><head></head><body class="bg-background loaded">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Solusi | Segara.AI - Pengawasan Maritim Berbasis AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f7f9fb",
+                    "outline": "#6e7882",
+                    "inverse-primary": "#89ceff",
+                    "surface-tint": "#006591",
+                    "surface-dim": "#d8dadc",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#bdc8d2",
+                    "on-primary-container": "#004361",
+                    "surface-container": "#eceef0",
+                    "on-primary-fixed": "#001e2f",
+                    "on-surface": "#191c1e",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-bright": "#f7f9fb",
+                    "tertiary-fixed-dim": "#ffb86a",
+                    "tertiary": "#885200",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#3e4851",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-primary-fixed-variant": "#004c6e",
+                    "inverse-on-surface": "#eff1f3",
+                    "primary-container": "#00b4ff",
+                    "on-tertiary-fixed": "#2c1700",
+                    "on-secondary-fixed": "#131b2e",
+                    "secondary": "#565e74",
+                    "primary-fixed": "#c9e6ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-background": "#191c1e",
+                    "primary": "#006591",
+                    "surface-container-high": "#e6e8ea",
+                    "secondary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#5b3500",
+                    "secondary-container": "#dae2fd",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-secondary-container": "#5c647a",
+                    "tertiary-container": "#f09408",
+                    "primary-fixed-dim": "#89ceff",
+                    "tertiary-fixed": "#ffdcbc",
+                    "on-tertiary-fixed-variant": "#683d00",
+                    "surface-container-low": "#f2f4f6",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "gutter": "24px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "40px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Sora"],
+                    "display-lg-mobile": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-lg": ["Sora"],
+                    "body-md": ["Sora"],
+                    "label-sm": ["Sora"],
+                    "body-lg": ["Sora"],
+                    "headline-md": ["Sora"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.0", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.6s ease-out;
+            font-family: 'Sora', sans-serif;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e0e3e5;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            border-color: #00b4ff;
+            box-shadow: 0 20px 40px rgba(0, 101, 145, 0.08);
+            transform: translateY(-8px);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #006591, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glow-pulse {
+            box-shadow: 0 0 10px rgba(0, 101, 145, 0.2);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 101, 145, 0.3); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 101, 145, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 101, 145, 0); }
+        }
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        .mobile-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .mobile-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+<!-- TopNavBar -->
+<header class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-[100] border-b border-outline-variant/20 h-20 transition-all duration-500">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<a class="font-headline-md text-headline-md font-extrabold text-primary transition-link z-[110] tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<!-- Desktop Nav -->
+<nav class="hidden lg:flex items-center gap-stack-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="index.html">Beranda</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1 transition-link" href="#">Solusi</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="teknologi.html">Teknologi</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="demo.html">Demo</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="tentang-kami.html">Tentang Kami</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+</nav>
+<div class="flex items-center gap-6 z-[110]">
+<a href="masuk.html" class="hidden lg:block text-primary font-label-md hover:text-on-primary-fixed transition-colors transition-link">Masuk</a>
+<a href="daftar.html" class="bg-primary text-on-primary px-8 py-2.5 rounded-full font-label-md font-bold active:scale-95 hover:bg-on-primary-fixed duration-300 transition-all shadow-md hover:shadow-primary/20 inline-block text-center">Daftar</a>
+<button aria-label="Toggle Menu" class="lg:hidden flex items-center p-2 text-primary z-[120]" id="menu-toggle">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Mobile Menu Overlay Background -->
+<div class="mobile-overlay fixed inset-0 bg-black/60 z-[100] lg:hidden" id="mobile-overlay"></div>
+<!-- Mobile Menu Drawer -->
+<div class="fixed top-0 right-0 h-full w-full max-w-[300px] bg-white z-[110] shadow-2xl lg:hidden flex flex-col p-6" id="mobile-menu">
+<div class="flex justify-between items-center mb-10">
+<a class="font-headline-md text-headline-sm font-extrabold text-primary transition-link tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<button aria-label="Close Menu" class="p-2 text-on-surface-variant hover:text-primary transition-colors" id="menu-close">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="index.html">Beranda</a>
+<a class="text-2xl font-bold text-primary transition-link py-2 border-b border-primary" href="#">Solusi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="teknologi.html">Teknologi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="demo.html">Demo</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="tentang-kami.html">Tentang Kami</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+<div class="h-px bg-outline-variant/30 my-2"></div>
+<a class="text-2xl font-bold text-primary transition-link py-2" href="masuk.html">Masuk</a>
+</div>
+<div class="mt-auto pt-4">
+<a href="daftar.html" class="w-full py-4 rounded-xl font-bold bg-primary text-on-primary shadow-lg hover:opacity-90 transition-all text-center block">Daftar Sekarang</a>
+</div>
+</div>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-12 md:pt-24 pb-12 md:pb-20 px-gutter overflow-hidden reveal active">
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<img alt="Modern industrial seaport background" class="w-full h-full object-cover" src="../IMAGE/sea.jpg">
+</div>
+<div class="max-w-container-max mx-auto relative z-10">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Intelligence Suite</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-6xl mb-6 text-on-surface leading-tight">Solusi Monitoring Kelautan&nbsp;<span class="text-gradient">Terpadu</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl">Lindungi kedaulatan laut dengan teknologi segara AI secara real-time untuk keamanan tanpa kompromi.</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Solutions -->
+<section class="py-stack-lg px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- AIS Anomaly Detection (Wide) -->
+<div class="md:col-span-12 lg:col-span-8 glass-card rounded-2xl overflow-hidden group reveal active">
+<div class="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center">
+<div class="w-full md:w-1/2 space-y-4 order-2 md:order-1">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">radar</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Deteksi Anomali AIS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Identifikasi perilaku mencurigakan seperti transponder yang dimatikan, pemalsuan lokasi, dan pola navigasi tidak wajar.</p>
+<ul class="space-y-2 text-on-surface-variant font-label-sm">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Deteksi Dark Vessels secara instan</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Analisis deviasi rute otomatis</li>
+</ul>
+<button class="text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all mt-4 transition-link" onclick="window.location.href='teknologi.html'">Pelajari Teknologi AIS <span class="material-symbols-outlined">arrow_forward</span></button>
+</div>
+<div class="w-full md:w-1/2 h-48 md:h-64 order-1 md:order-2 rounded-xl overflow-hidden">
+<img alt="AIS mapping visualization" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG5UZPYhGIOiSXZ33JSIdP6lnBvmVCc0pjot15va0CeNVlT5Y0NVs5NMGm848SdgJnv1gTXBJ9HpARJ2zhLWAcuCYkexVvh65pzFU1--Sw44bLKhppJIVdgDley15p3aDaMyWDSJE03erl8Q7yA-oKz8NPHh-uvAOvM9rxa1KJtoSeemGn8lFxP06mv0yRiYoG4W7yqt1EBnywCLGej3Sj8m5C2eqMCNZ4PUrwOTiuPlF3CD95KBpryxhe4Oe-wp7FG81zA6ZgncgeQA">
+</div>
+</div>
+</div>
+<!-- Data Manipulation Prevention (Tall) -->
+<div class="md:col-span-6 lg:col-span-4 glass-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group reveal active">
+<div class="space-y-6">
+<div class="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Analisis <br class="hidden lg:block">Manipulasi Data</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Aktifitas ilegal seringkali memanipulasi data agar tidak terdeteksi oleh VTS, maka diperlukan sistem deteksi berbasis AI, untuk membantu aktifitas monitoring.</p>
+<div class="rounded-xl overflow-hidden h-32 md:h-40">
+<img alt="Secure data encryption visualization" class="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCciPW9tr7Lkiokin8hDKyxi2z4GdHV6dn-avco1PNca0J7VROsuOsG6QqHP7WmkvqLeoBD6lJ1GsCZw_MYWhsZbDfDcbTLv8g40HbIaDeF1RhyZDoW6iiEr6baCx9edFmtydeXDukIyvaLg8n_VejcJ0DCQKCTXALsOs0rjCpYTwkDJfBBGACQarr7mfNPQWjl1yiAucSa6qzbskyeKLhtHfeNYy72d9yLBcZiFhDx80K5JhGz7hFnL_yXWJxGzxlAbyDuucG9Ag1FtA">
+</div>
+</div>
+<button class="mt-8 text-primary font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform transition-link" onclick="window.location.href='demo.html'">Coba Demo Analitik <span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<!-- Port Security Monitoring -->
+<div class="md:col-span-6 glass-card rounded-2xl p-6 md:p-8 group reveal active">
+<div class="flex flex-col sm:flex-row items-start gap-6">
+<div class="w-16 h-16 shrink-0 rounded-2xl bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl">security</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Keamanan Pelabuhan 360°</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Pemantauan menyeluruh yang menganalisis kapal yang berlayar.</p>
+<div class="flex items-center gap-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary">Deteksi Ancaman</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">99.7%</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary">Respon Cepat</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">&lt;2 Detik</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Dashboard Preview (Small) -->
+<div class="md:col-span-12 lg:col-span-6 glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden group reveal active">
+<div class="flex flex-col h-full justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Data Visualisasi Real-Time</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Ubah data mentah menjadi wawasan operasional yang dapat ditindaklanjuti secara instan melalui dashboard perintah.</p>
+</div>
+<div class="mt-6 flex gap-2">
+<div class="h-2 w-12 rounded-full bg-primary glow-pulse"></div>
+<div class="h-2 w-2 rounded-full bg-surface-container-highest"></div>
+<div class="h-2 w-2 rounded-full bg-surface-container-highest"></div>
+</div>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 md:w-48 md:h-48 opacity-5 group-hover:opacity-10 transition-all duration-500 group-hover:scale-110">
+<span class="material-symbols-outlined text-[100px] md:text-[180px] text-primary">monitoring</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Study Section -->
+<section class="py-12 md:py-20 bg-surface-container mt-10 reveal active">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="text-center mb-10 md:mb-16">
+<span class="font-label-md text-label-md text-primary uppercase tracking-widest">Kisah Sukses</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-4">Implementasi yang Terbukti</h2>
+</div>
+<div class="relative">
+<div class="flex flex-col lg:flex-row glass-card border-none rounded-3xl overflow-hidden group shadow-xl">
+<div class="lg:w-1/2 h-[300px] md:h-[450px] overflow-hidden">
+<img alt="Maritime traffic controller at work" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa7HwqFLorVuJ8TlLybbVh_X_x-SfZ-fqjU1PhGIXjR-7JZwl8kc-utdmGucOb_cQrqtyLGvRv9N-RwlhkLaQWU4T1wAi59Uso3MWJgh9IW3urMzyU_f_5L79P7Qotu2PjE4CEcbmeLaGylmfPyce2OhdaEhscIIz1LYeMXG91BOtvJJ5Cvj8LLMHraY5MUEZXpuTQ_lNVkPxyKvhBC9jaPfQwNntxt6Q1NsLBT7OZcvDzo0Neur62ylW_zyvlRd09810HV95DA_U">
+</div>
+<div class="lg:w-1/2 p-6 md:p-12 flex flex-col justify-center bg-white">
+<span class="font-label-md text-label-md text-secondary mb-4"><i>*hanya sebagai contoh</i></span>
+<blockquote class="font-headline-sm text-headline-sm md:text-2xl text-on-surface mb-8 italic leading-relaxed">
+                            "Setelah mengintegrasikan Segara.AI, kami mencatat penurunan insiden keamanan sebesar 45% dan peningkatan efisiensi logistik bongkar muat hingga 30% dalam tahun pertama."
+                        </blockquote>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-bold">Nyoman Selem&nbsp;</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Director of Operations</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 border-t border-outline-variant/30 pt-8">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Insiden</p>
+<p class="text-xl md:text-2xl font-bold text-error">-45%</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Efisiensi</p>
+<p class="text-xl md:text-2xl font-bold text-primary">+30%</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ROI</p>
+<p class="text-xl md:text-2xl font-bold text-tertiary">8 bln</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-12 md:py-24 px-gutter text-center reveal active">
+<div class="max-w-3xl mx-auto bg-primary rounded-3xl p-8 md:p-12 relative overflow-hidden group shadow-2xl">
+<div class="absolute inset-0 bg-black/5 pointer-events-none group-hover:bg-black/10 transition-colors"></div>
+<h2 class="font-headline-lg text-headline-lg text-on-primary mb-6 relative z-10">Siap Mengamankan Wilayah Perairan Anda?</h2>
+<p class="font-body-lg text-body-lg text-white/80 mb-10 relative z-10">Konsultasikan kebutuhan spesifik Anda dengan tim ahli kami dan dapatkan demo solusi yang dipersonalisasi.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+<button class="bg-white text-primary px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all shadow-lg active:scale-95" onclick="window.location.href='#'">Jadwalkan Konsultasi</button>
+<button class="border border-white/40 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all transition-link" onclick="window.location.href='teknologi.html'">Lihat Katalog Produk</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white text-on-surface-variant font-body-md border-t border-outline-variant/20">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-stack-lg px-gutter py-12 md:py-16 max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">sailing</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Segara.AI</span>
+</div>
+<p class="font-label-sm text-label-sm">Inovasi kecerdasan buatan untuk kedaulatan dan efisiensi maritim global.</p>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-bold">Solusi</h4>
+<ul class="space-y-2 font-label-sm text-label-sm">
+<li class=""><a class="hover:text-primary transition-colors transition-link" href="#">Deteksi Anomali AIS</a></li>
+<li class=""><a class="hover:text-primary transition-colors transition-link" href="#">Manipulasi Data</a></li>
+<li class=""><a class="hover:text-primary transition-colors transition-link" href="#">Keamanan Pelabuhan</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-bold">Perusahaan</h4>
+<ul class="space-y-2 font-label-sm text-label-sm">
+<li class=""><a class="hover:text-primary transition-colors transition-link" href="tentang-kami.html">Tentang Kami</a></li>
+<li class=""><a class="hover:text-primary transition-colors transition-link" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Karier</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-bold">Hukum</h4>
+<ul class="space-y-2 font-label-sm text-label-sm">
+<li class=""><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li class=""><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-6 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant/10">
+<p class="font-label-sm text-label-sm text-center md:text-left">© 2024 Segara.AI. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors font-label-sm text-label-sm" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Twitter</a>
+</div>
+</div>
+</footer>
+<script>
+    // Reveal functionality
+    const reveal = () => {
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach(element => {
+            const windowHeight = window.innerHeight;
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                element.classList.add('active');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', reveal);
+    
+    // Mobile Menu Toggle Logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    const toggleMenu = (show) => {
+        if (show) {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (menuToggle) menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu(true);
+    });
+    if (menuClose) menuClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu(false);
+    });
+    if (mobileOverlay) mobileOverlay.addEventListener('click', () => toggleMenu(false));
+
+    // Close menu when clicking escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') toggleMenu(false);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('loaded');
+        reveal();
+    });
+
+    // Integrated Transition Logic for all links
+    document.querySelectorAll('.transition-link, a[href]').forEach(link => {
+        const href = link.getAttribute('href') || link.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        
+        // Skip purely functional or external links
+        if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('javascript:')) return;
+
+        link.addEventListener('click', (e) => {
+            // Internal navigation
+            e.preventDefault();
+            
+            // Close mobile menu if open before transitioning
+            toggleMenu(false);
+            
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = href;
+            }, 400);
+        });
+    });
+</script>
+
+
+
+</body></html>
+

@@ -1,0 +1,557 @@
+<!DOCTYPE html><html class="" lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Teknologi | Segara.AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fb",
+                        "outline": "#6e7882",
+                        "inverse-primary": "#89ceff",
+                        "surface-tint": "#006591",
+                        "surface-dim": "#d8dadc",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bdc8d2",
+                        "on-primary-container": "#004361",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#001e2f",
+                        "on-surface": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#ffb86a",
+                        "tertiary": "#885200",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3e4851",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#00b4ff",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-secondary-fixed": "#131b2e",
+                        "secondary": "#565e74",
+                        "primary-fixed": "#c9e6ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-background": "#191c1e",
+                        "primary": "#006591",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-container": "#5b3500",
+                        "secondary-container": "#dae2fd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#5c647a",
+                        "tertiary-container": "#f09408",
+                        "primary-fixed-dim": "#89ceff",
+                        "tertiary-fixed": "#ffdcbc",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "data-glow": "#006591"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-md": ["Sora"],
+                        "label-sm": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            overflow-x: hidden;
+        }
+
+        #page-wrapper {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        #page-wrapper.page-ready {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .surface-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 101, 145, 0.1);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            border-color: rgba(0, 101, 145, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 101, 145, 0.1);
+            transform: translateY(-8px);
+        }
+
+        .diagram-container {
+            transition: all 0.4s ease;
+        }
+        .glass-card-hover:hover .diagram-container {
+            background-color: rgba(0, 101, 145, 0.03);
+            border-color: rgba(0, 101, 145, 0.3);
+        }
+
+        .ocean-bg {
+            background: radial-gradient(circle at 50% -20%, #e3f2fd 0%, #f7f9fb 70%);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .tech-line {
+            background: linear-gradient(90deg, transparent, #00b4ff, transparent);
+            height: 2px;
+            width: 100%;
+        }
+
+        .glow-pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; box-shadow: 0 0 5px rgba(0, 101, 145, 0.4); }
+            50% { opacity: 1; box-shadow: 0 0 15px rgba(0, 101, 145, 0.6); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .card-icon-hover {
+            transition: transform 0.3s ease;
+        }
+        .glass-card-hover:hover .card-icon-hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        #mobile-overlay {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Responsive Pipeline Line */
+        .pipeline-connector {
+            position: absolute;
+            background: linear-gradient(to right, transparent, #00b4ff, transparent);
+            height: 2px;
+            width: 100%;
+            top: 4.5rem;
+            left: 0;
+            opacity: 0.2;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .pipeline-connector {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<div class="page-ready" id="page-wrapper">
+<!-- TopNavBar -->
+<nav class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-[100] border-b border-outline-variant/20 h-20 transition-all duration-500">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full">
+<a class="font-headline-md text-headline-md font-extrabold text-primary transition-link z-[110] tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<!-- Desktop Nav -->
+<div class="hidden lg:flex items-center gap-stack-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="index.html">Beranda</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="solusi.html">Solusi</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1 transition-link" href="teknologi.html">Teknologi</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="demo.html">Demo</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="tentang-kami.html">Tentang Kami</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 transition-link" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+</div>
+<!-- CTA/Menu Toggle -->
+<div class="flex items-center gap-6 z-[110]">
+<a class="hidden lg:block text-primary font-label-md hover:text-on-primary-fixed transition-colors transition-link" href="masuk.html">Masuk</a>
+<a href="daftar.html" class="bg-primary text-on-primary px-8 py-2.5 rounded-full font-label-md font-bold active:scale-95 hover:bg-on-primary-fixed duration-300 transition-all shadow-md hover:shadow-primary/20 inline-block text-center">Daftar</a>
+<button aria-label="Menu" class="lg:hidden text-primary p-2 focus:outline-none flex items-center justify-center cursor-pointer" id="menu-toggle">
+<span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Mobile Menu Overlay Background -->
+<div class="mobile-overlay fixed inset-0 bg-black/60 z-[100] lg:hidden" id="mobile-overlay"></div>
+<!-- Mobile Menu Drawer -->
+<div class="fixed top-0 right-0 h-full w-full max-w-[300px] bg-white z-[105] shadow-2xl flex flex-col p-6 lg:hidden" id="mobile-menu">
+<div class="flex justify-between items-center mb-10">
+<a class="font-headline-md text-headline-sm font-extrabold text-primary transition-link tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<button aria-label="Close Menu" class="p-2 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center cursor-pointer" id="menu-close">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="index.html">Beranda</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="solusi.html">Solusi</a>
+<a class="text-2xl font-bold text-primary transition-link py-2 border-b border-primary" href="teknologi.html">Teknologi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="demo.html">Demo</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="tentang-kami.html">Tentang Kami</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+<div class="h-px bg-outline-variant/30 my-2"></div>
+<a class="text-2xl font-bold text-primary transition-link py-2" href="masuk.html">Masuk</a>
+</div>
+</div>
+<!-- Hero Section -->
+<header class="relative pt-32 pb-16 md:pt-40 md:pb-20 px-gutter overflow-hidden ocean-bg">
+<div class="max-w-container-max mx-auto text-center relative z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-primary/20 mb-6 reveal active">
+<span class="w-2 h-2 rounded-full bg-primary glow-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Inovasi Deep-Sea Intelligence</span>
+</div>
+<h1 class="font-headline-lg text-2xl md:text-headline-lg mb-6 reveal text-on-surface leading-tight active">
+                Arsitektur Kecerdasan<br><span class="text-primary">Kedaulatan Maritim</span>
+</h1>
+<p class="max-w-2xl mx-auto font-body-lg text-base md:text-body-lg text-on-surface-variant reveal active" style="transition-delay: 100ms;">
+                Menggabungkan sensor fusi mutakhir dengan model AI generatif untuk mendefinisikan ulang pengawasan wilayah perairan otonom melalui deteksi anomali data tingkat tinggi.
+            </p>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/5 rounded-full blur-[60px] md:blur-[120px] pointer-events-none"></div>
+</header>
+<!-- Main Content -->
+<main class="py-stack-lg max-w-container-max mx-auto px-gutter">
+<!-- Bento Grid Technologies -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 md:mb-24">
+<!-- Kalman Filter Card -->
+<div class="md:col-span-7 bg-white border border-outline-variant rounded-xl p-6 md:p-8 glass-card-hover reveal active">
+<div class="flex items-start justify-between mb-8">
+<div>
+<span class="font-label-md text-label-md text-primary mb-2 block">TRACKING ENGINE</span>
+<h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Adaptive Kalman Filter</h3>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl md:text-4xl card-icon-hover">insights</span>
+</div>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant mb-8">
+                    Algoritma estimasi rekursif yang mengahsilkan parameter <i>kalman </i>sebagai penunjang<i> </i>model AI<i> Self-Supervised transformer </i>untuk&nbsp;mendeteksi manipulasi data lintasan (spoofing) secara real-time.
+                </p>
+<div class="bg-surface-container-low rounded-lg p-4 md:p-6 border border-outline-variant diagram-container">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-70 uppercase">Trajectory Validation</span>
+<span class="font-label-sm text-label-sm text-primary font-bold">SECURE</span>
+</div>
+<!-- Technical Diagram -->
+<div class="h-24 md:h-32 flex items-end gap-2 px-1 md:px-2">
+<div class="flex-1 bg-primary/10 h-1/2 rounded-t-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary/60 h-3/4 animate-pulse"></div>
+</div>
+<div class="flex-1 bg-primary/10 h-3/4 rounded-t-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary/60 h-1/2 animate-pulse" style="animation-delay: 200ms;"></div>
+</div>
+<div class="flex-1 bg-primary/10 h-2/3 rounded-t-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary/60 h-4/5 animate-pulse" style="animation-delay: 400ms;"></div>
+</div>
+<div class="flex-1 bg-primary/10 h-full rounded-t-sm relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full bg-primary/60 h-2/3 animate-pulse" style="animation-delay: 600ms;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Self-Supervised Card -->
+<div class="md:col-span-5 bg-white border border-outline-variant rounded-xl p-6 md:p-8 glass-card-hover reveal active" style="transition-delay: 150ms;">
+<div class="flex flex-col h-full">
+<div class="flex items-start justify-between mb-8">
+<div>
+<span class="font-label-md text-label-md text-secondary mb-2 block">PATTERN RECOGNITION</span>
+<h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Self-Supervised Transformer</h3>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl md:text-4xl card-icon-hover">neurology</span>
+</div>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant flex-grow">
+                        Model AI yang belajar mandiri untuk mengidentifikasi perilaku anomali melalui analisis pola yang tidak wajar.
+                    </p>
+<div class="mt-8 pt-6 border-t border-outline-variant flex items-center gap-4 diagram-container p-4 rounded-lg">
+<div class="w-10 h-10 md:w-12 md:h-12 rounded bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-xl md:text-2xl">hub</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">1.2B Parameters</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Behavioral Neural Net</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AIS Anomaly Detection -->
+
+<!-- Drone Vision Card -->
+<div class="md:col-span-7 bg-white border border-outline-variant rounded-xl p-0 overflow-hidden glass-card-hover reveal active" style="transition-delay: 250ms;">
+<div class="grid grid-cols-1 md:grid-cols-2 h-full">
+
+
+</div>
+</div>
+</div>
+<!-- Technical Diagram Section -->
+<section class="mb-16 md:mb-24 reveal active">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg text-2xl md:text-headline-lg text-on-surface mb-4">Workspace Segara AI</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto px-4">Bagaimana teknologi kami memvalidasi setiap bit informasi untuk memastikan kedaulatan maritim.</p>
+</div>
+<div class="bg-white border border-outline-variant rounded-2xl p-6 md:p-gutter relative overflow-hidden shadow-sm">
+<!-- Animated Connection Line (Visible on Tablet/Desktop) -->
+<div class="pipeline-connector"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+<!-- Step 1 -->
+<div class="text-center space-y-4 reveal active" style="transition-delay: 100ms;">
+<div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6 transition-transform hover:scale-110 group cursor-default">
+<span class="material-symbols-outlined text-primary text-2xl md:text-3xl">sensors</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-headline-md text-on-surface">Input&nbsp;</h4>
+<p class="text-on-surface-variant font-label-md text-sm md:text-base">Data mentah dari Sonar, Radar, dan AIS ditangkap.</p>
+</div>
+<!-- Step 2 -->
+<div class="text-center space-y-4 reveal active" style="transition-delay: 200ms;">
+<div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6 transition-transform hover:scale-110 group cursor-default">
+<span class="material-symbols-outlined text-primary text-2xl md:text-3xl">shield_lock</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-headline-md text-on-surface">Proses</h4>
+<p class="text-on-surface-variant font-label-md text-sm md:text-base">AI mendeteksi data yang memiliki kecendrungan melakukan aktifitas ilegal</p>
+</div>
+<!-- Step 3 -->
+<div class="text-center space-y-4 reveal active" style="transition-delay: 300ms;">
+<div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6 transition-transform hover:scale-110 group cursor-default">
+<span class="material-symbols-outlined text-primary text-2xl md:text-3xl">verified</span>
+</div>
+<h4 class="font-headline-md text-lg md:text-headline-md text-on-surface">Output</h4>
+<p class="text-on-surface-variant font-label-md text-sm md:text-base">Informasi yang telah divalidasi dikirim untuk monitoring.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-primary-fixed border border-primary/20 rounded-2xl p-8 md:p-gutter text-center reveal mb-16 md:mb-24 overflow-hidden relative shadow-md active">
+<div class="relative z-10">
+<h2 class="font-headline-lg text-2xl md:text-headline-lg text-on-primary-fixed mb-6 leading-tight">Siap Mengamankan Wilayah Maritim Anda?</h2>
+<p class="max-w-xl mx-auto mb-10 text-on-primary-fixed-variant text-sm md:text-base">Pelajari lebih lanjut bagaimana arsitektur AI deteksi anomali kami dapat diintegrasikan dengan sistem pertahanan Anda.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold hover:scale-95 transition-all shadow-lg shadow-primary/20 inline-block text-sm md:text-base" href="demo.html">Mulai Demo Sekarang</a>
+<a class="bg-white/80 border border-primary/20 text-primary px-8 py-4 rounded-full font-bold hover:bg-white transition-all inline-block text-sm md:text-base" href="https://drive.google.com/drive/folders/1ZE5eCwaXwNWZtnCkhntjmCW-ooyAKpqg?usp=sharing" target="_blank" rel="noopener noreferrer">Unduh Whitepaper</a>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="absolute -bottom-24 -right-24 w-48 md:w-64 h-48 md:h-64 bg-primary/10 rounded-full blur-3xl"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-stack-lg px-gutter py-12 max-w-container-max mx-auto">
+<div class="col-span-1 sm:col-span-2 md:col-span-1">
+<a class="font-headline-md text-headline-md font-bold text-primary mb-4 block" href="index.html">Segara.AI</a>
+<p class="text-on-surface-variant font-body-md text-sm">Membangun masa depan kedaulatan maritim melalui kecerdasan buatan kelas dunia.</p>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-6 font-label-md">Navigasi</h5>
+<ul class="space-y-3">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="index.html">Beranda</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="solusi.html">Solusi</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="teknologi.html">Teknologi</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="demo.html">Demo</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-6 font-label-md">Legal</h5>
+<ul class="space-y-3">
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Terms of Service</a></li>
+<li class=""><a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Sitemap</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-6 font-label-md">Media Sosial</h5>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="#">LinkedIn</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Twitter</a>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-gutter py-6 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-on-surface-variant font-label-sm text-xs md:text-sm">© 2024 Segara.AI. All rights reserved.</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-600"></span>
+<span class="text-on-surface-variant font-label-sm font-medium text-xs md:text-sm">System Operational</span>
+</div>
+</div>
+</footer>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('page-wrapper');
+        setTimeout(() => {
+            wrapper.classList.add('page-ready');
+        }, 50);
+
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const menuIcon = document.getElementById('menu-icon');
+        let isMenuOpen = false;
+
+        const openMenu = () => {
+            isMenuOpen = true;
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            menuIcon.innerText = 'close';
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeMenu = () => {
+            isMenuOpen = false;
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuIcon.innerText = 'menu';
+            document.body.style.overflow = '';
+        };
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isMenuOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Close menu when clicking outside
+        mobileOverlay.addEventListener('click', closeMenu);
+
+        // Close mobile menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && isMenuOpen) {
+                closeMenu();
+            }
+        });
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -20px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('bg-white/95');
+                if (window.innerWidth >= 768) {
+                    nav.classList.replace('h-20', 'h-16');
+                }
+            } else {
+                nav.classList.remove('bg-white/95');
+                if (window.innerWidth >= 768) {
+                    nav.classList.replace('h-16', 'h-20');
+                }
+            }
+        });
+
+        // Transitions for internal links
+        const links = document.querySelectorAll('a[href*="SCREEN_"]');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && !href.startsWith('http')) {
+                    e.preventDefault();
+                    
+                    if (isMenuOpen) {
+                        closeMenu();
+                    }
+                    
+                    wrapper.style.opacity = '0';
+                    wrapper.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+        });
+    });
+</script>
+
+
+</body></html>
+

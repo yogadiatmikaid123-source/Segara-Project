@@ -1,0 +1,518 @@
+<!DOCTYPE html><html class="" lang="id" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tentang Kami - Segara.AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#f7f9fb",
+                        "outline": "#6e7882",
+                        "inverse-primary": "#89ceff",
+                        "surface-tint": "#006591",
+                        "surface-dim": "#d8dadc",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bdc8d2",
+                        "on-primary-container": "#004361",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed": "#001e2f",
+                        "on-surface": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed-dim": "#ffb86a",
+                        "tertiary": "#885200",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3e4851",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-container": "#00b4ff",
+                        "on-tertiary-fixed": "#2c1700",
+                        "on-secondary-fixed": "#131b2e",
+                        "secondary": "#565e74",
+                        "primary-fixed": "#c9e6ff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-background": "#191c1e",
+                        "primary": "#006591",
+                        "surface-container-high": "#e6e8ea",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-container": "#5b3500",
+                        "secondary-container": "#dae2fd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-secondary-container": "#5c647a",
+                        "tertiary-container": "#f09408",
+                        "primary-fixed-dim": "#89ceff",
+                        "tertiary-fixed": "#ffdcbc",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "glass-light": "rgba(255, 255, 255, 0.7)"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px"
+                    },
+                    fontFamily: {
+                        "label-md": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "body-md": ["Sora"],
+                        "label-sm": ["Sora"],
+                        "body-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "headline-sm": ["Sora"]
+                    },
+                    fontSize: {
+                        "label-md": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            color: #191c1e;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 101, 145, 0.1);
+        }
+        .light-ocean-gradient {
+            background: radial-gradient(circle at 50% 50%, #f0f7ff 0%, #f7f9fb 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #006591, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-border:hover {
+            box-shadow: 0 8px 30px rgba(0, 101, 145, 0.12);
+            border-color: rgba(0, 101, 145, 0.4);
+            transform: translateY(-4px);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Page Transition */
+        .page-transition {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .parallax-bg {
+            will-change: transform;
+        }
+        .team-card-interactive:hover .team-info {
+            transform: translateY(-8px);
+        }
+        .team-card-interactive img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .team-card-interactive:hover img {
+            transform: scale(1.05);
+        }
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
+        #mobile-overlay {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface light-ocean-gradient page-transition">
+<!-- TopNavBar -->
+<header class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-[100] border-b border-outline-variant/20 h-20 transition-all duration-500">
+<nav class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-full relative">
+<a class="font-headline-md text-headline-md font-extrabold text-primary transition-link z-[110] tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<!-- Desktop Nav -->
+<div class="hidden lg:flex items-center gap-stack-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="index.html">Beranda</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="solusi.html">Solusi</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="teknologi.html">Teknologi</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="demo.html">Demo</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1" href="tentang-kami.html">Tentang Kami</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+</div>
+<div class="flex items-center gap-6 z-[110]">
+<a href="masuk.html" class="hidden lg:block text-primary font-label-md hover:text-on-primary-fixed transition-colors transition-link">Masuk</a>
+<a href="daftar.html" class="bg-primary text-on-primary px-8 py-2.5 rounded-full font-label-md font-bold active:scale-95 hover:bg-on-primary-fixed duration-300 transition-all shadow-md hover:shadow-primary/20 inline-block text-center">Daftar</a>
+<!-- Mobile Menu Toggle -->
+<button aria-label="Toggle Menu" class="lg:hidden p-2 text-primary hover:bg-surface-container rounded-lg transition-colors z-[130]" id="menu-toggle">
+<span class="material-symbols-outlined" id="menu-icon">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay fixed inset-0 bg-black/60 z-[100] lg:hidden" id="mobile-overlay"></div>
+<!-- Mobile Menu Drawer -->
+<div class="fixed top-0 right-0 h-full w-full max-w-[300px] bg-white z-[120] shadow-2xl flex flex-col p-6 lg:hidden" id="mobile-menu">
+<div class="flex justify-between items-center mb-10">
+<a class="font-headline-md text-headline-sm font-extrabold text-primary transition-link tracking-tighter" href="index.html">Segara<span class="text-on-surface">.AI</span></a>
+<button aria-label="Close Menu" class="p-2 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center cursor-pointer" id="menu-close">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-6">
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="index.html">Beranda</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="solusi.html">Solusi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="teknologi.html">Teknologi</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="demo.html">Demo</a>
+<a class="text-2xl font-bold text-primary transition-link py-2 border-b border-primary" href="tentang-kami.html">Tentang Kami</a>
+<a class="text-2xl font-semibold text-on-surface-variant hover:text-primary transition-link py-2 border-b border-outline-variant/10" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Kontak</a>
+<div class="h-px bg-outline-variant/30 my-2"></div>
+<a class="text-2xl font-bold text-primary transition-link py-2" href="masuk.html">Masuk</a>
+</div>
+<div class="mt-auto pt-4">
+<a href="daftar.html" class="w-full bg-primary text-on-primary px-6 py-4 rounded-full font-bold hover:opacity-90 transition-opacity font-label-md text-center block">Daftar</a>
+</div>
+</div>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[500px] md:min-h-[600px] flex items-center justify-center overflow-hidden px-gutter py-20 md:py-0" id="hero-section">
+<div class="absolute inset-0 z-0 parallax-bg" id="hero-parallax" style="transform: translate(0.562px, -1.419px);">
+<img alt="Futuristic naval control room in light theme" class="w-full h-full object-cover opacity-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaLU4_cMPjJ3uJLeJwFulqv8AbYQGxEjFrcAaRrCtVYxN0BKSIIAgtxZy3sk3aJV19esWEw4U17rAsJ2eF4TGDVoJMGZ2-Bc4RKyOg2vQOJmEoJPDhL0Uei2m2yrDKtym47NcqPR-0S457ehScRqExCtGsyTeqzIcBDzRfQ5e54gHj13SxGyzQQipd4sjRyExdE2Wlz73Ax7duF5SyUOBecSb58jtuHCKujcTLUQ60XJYbTutR8ybZ5vktOaSf6jD1g4W9ENpok_4">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl mx-auto">
+<span class="font-label-md text-label-sm md:text-label-md text-primary tracking-widest uppercase mb-4 block scroll-reveal active">Masa Depan Kedaulatan</span>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 scroll-reveal active">Menjaga Kelautan Melalui Kecerdasan.</h1>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant scroll-reveal max-w-2xl mx-auto active">Segara.AI hadir sebagai perisai digital yang memadukan teknologi kecerdasan buatan dengan dedikasi untuk laut Indonesia.</p>
+</div>
+</section>
+<!-- Sejarah Singkat -->
+<section class="py-stack-lg px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+<div class="scroll-reveal order-2 lg:order-1 active">
+<h2 class="font-headline-md text-headline-sm md:text-headline-md text-on-surface mb-6">Pionir Platform AIS AI Terdepan</h2>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<p class="">Segara.AI lahir dari kebutuhan mendesak akan visibilitas maritim yang absolut. Kami bukan sekadar penyedia data; kami adalah arsitek di balik platform kecerdasan AIS (Automatic Identification System) paling canggih di kawasan ini.</p>
+<p class="">Kami telah merevolusi cara data maritim diolah. Dengan mengintegrasikan AI prediktif ke dalam aliran data AIS global dan terestrial, kami mengubah miliaran titik koordinat menjadi wawasan strategis yang dapat ditindaklanjuti secara real-time.</p>
+<p class="">Visi kami adalah menjadi standar emas global dalam analisis lalu lintas laut, membantu pemerintah dan industri memitigasi risiko sebelum terjadi, memastikan kedaulatan digital di setiap koordinat.</p>
+</div>
+</div>
+<div class="relative scroll-reveal order-1 lg:order-2 active">
+<div class="bg-surface-container rounded-xl overflow-hidden aspect-video shadow-lg">
+<img alt="Laboratory setting in light theme" class="w-full h-full object-cover mix-blend-multiply opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh6AZLZwra3T48Oc58vFSF2aBgLySlOYmbcpYPD7Wf645feJa-VC0-3vtWFb5LKAgNpNSDRM69BS6262GrhXzO_ftLh_BnviyiwbXPaoACk1RREZio_CTBMS52jn7jIltvUNcpp0os1gHC8QJT_4ZoowmYzClX188D9io-la382kZGXr0iND8yTs51ZCA9wtQJDubZ49TdAt38I0K8vn8uXBGygOqh5LdDJZInqWnPsec-KIVVGcP5zZCz-4akIEj0JWOZaYB7d6b78Q">
+</div>
+<div class="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 glass-card p-4 md:p-6 rounded-lg shadow-xl max-w-[200px] md:max-w-none">
+<p class="font-label-md text-label-sm md:text-label-md text-primary">AIS Analytics Expert</p>
+<p class="font-body-md text-body-sm md:text-body-md font-bold text-on-surface">Data Masif, Wawasan Presisi</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Visi & Misi: Bento Grid -->
+<section class="py-stack-lg bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-gutter">
+<h2 class="font-headline-md text-headline-sm md:text-headline-md text-on-surface text-center mb-10 md:mb-16 scroll-reveal active">Kompas Strategis Kami</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+<!-- Vision Card -->
+<div class="md:col-span-2 glass-card p-6 md:p-10 rounded-xl glow-border transition-all duration-300 scroll-reveal shadow-sm cursor-default active">
+<div class="flex flex-col sm:flex-row items-start gap-6">
+<div class="bg-primary/10 p-4 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl md:text-4xl" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 md:mb-4">Visi AIS AI Kami</h3>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant leading-relaxed">
+                                    Membangun ekosistem maritim yang sepenuhnya transparan dengan menjadi orkestrator data AIS berbasis AI tercanggih di dunia. Kami berkomitmen untuk mendefinisikan ulang keamanan laut melalui deteksi anomali otonom dan pemodelan rute prediktif yang belum pernah ada sebelumnya.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Stat Card -->
+<div class="glass-card p-8 rounded-xl flex flex-col justify-center items-center text-center scroll-reveal shadow-sm glow-border transition-all duration-300 cursor-default active">
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-2">99.9%</span>
+<p class="font-label-md text-label-sm md:text-label-md text-on-surface-variant uppercase tracking-widest">Akurasi Deteksi AIS</p>
+</div>
+<!-- Mission Cards -->
+<div class="glass-card p-6 md:p-8 rounded-xl glow-border transition-all duration-300 scroll-reveal shadow-sm group hover:bg-primary cursor-default active">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:text-on-primary transition-colors">security</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2 group-hover:text-on-primary transition-colors">Proteksi Real-time</h4>
+<p class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-primary/80 transition-colors">Memantau jutaan sinyal AIS untuk mendeteksi aktivitas gelap secara instan.</p>
+</div>
+<div class="glass-card p-6 md:p-8 rounded-xl glow-border transition-all duration-300 scroll-reveal shadow-sm group hover:bg-primary cursor-default active">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:text-on-primary transition-colors">insights</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2 group-hover:text-on-primary transition-colors">Intelijen Maritim</h4>
+<p class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-primary/80 transition-colors">Mengonversi data AIS mentah menjadi intelijen strategis untuk otoritas laut.</p>
+</div>
+<div class="glass-card p-6 md:p-8 rounded-xl glow-border transition-all duration-300 scroll-reveal shadow-sm group hover:bg-primary cursor-default active">
+<span class="material-symbols-outlined text-primary mb-4 group-hover:text-on-primary transition-colors">eco</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-2 group-hover:text-on-primary transition-colors">Efisiensi Laut</h4>
+<p class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-primary/80 transition-colors">Optimasi rute kapal berbasis AI untuk mengurangi emisi dan biaya operasional.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Profil Tim Ahli -->
+<section class="py-stack-lg px-gutter max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6 scroll-reveal active">
+<div>
+<h2 class="font-headline-md text-headline-sm md:text-headline-md text-on-surface">Tim Ahli Segara</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl"><br></p>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-2 hover:gap-4 transition-all group">
+                    Lihat Semua Karir <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" id="team-grid">
+<!-- Team Member 1 -->
+<div class="group scroll-reveal team-card-interactive active" style="transition-delay: 0ms;">
+<div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 bg-surface-container shadow-sm group-hover:shadow-xl transition-all">
+<img alt="Dr. Arya Samudra" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvIMwb4CufNZjHsLZddWmuQafXYPADkMIC5a18-Hk8qYLWlXlO7HElqIaX7YT3SyDCqjir6dWAhw-RzTz_MSpwVFgVEx-BOT7H_4Cvj0rCfqXJvffXT-tR6O7yT7n9w9-g2y9tEYx2BjEFM2vKY949pI_YdhNjnxmIqQp6__GSiJGJSVyhiW4eyIqpz6OjwnPXqBAtd-LUn8nTPP6Lr2hoebGQRu8jTaL3206RkRp7EKBX8t-WdElwz0hhEzvAtvrXr0fGEjhtrl7gbw">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="team-info transition-transform duration-300">
+<h4 class="font-headline-sm text-headline-sm text-on-surface"><i>*hanya sebagai contoh</i></h4>
+<p class="font-label-md text-label-sm md:text-label-md text-primary">Chief Executive Officer</p>
+</div>
+</div>
+<!-- Team Member 2 -->
+<div class="group scroll-reveal team-card-interactive active" style="transition-delay: 100ms;">
+<div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 bg-surface-container shadow-sm group-hover:shadow-xl transition-all">
+<img alt="Sarah Lestari" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf-GWvK_TEYHqDtKl1eyOlBbnyimpcpdq1GbuNEL55q84mn6sH0gqi_BimaMIpFTVAEiH7qKWQT71KIbZa-P1MxiPPj9qqtXwTOOMD-YVQQqe9Ne7cPkdqS7skMMtQKILIbRXLzS0EVIb5Oi8Sl1foXvLX8cIg5gR9zyRz16TKJF9EwvXuVpkZ-6vrH8IRt-lShz2EPgkH9Q3jt_F6IxKzmqNAGZ0f-IQdt2KnPyFGqWSHUhbAUa1ZEHZaJSucYA9sGAOfqJbFXiESTQ">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="team-info transition-transform duration-300">
+<h4 class="font-headline-sm text-headline-sm text-on-surface"><h4 class="font-headline-sm text-headline-sm text-on-surface" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(25, 28, 30); outline: none !important; box-shadow: none !important;"><i style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">*hanya sebagai contoh</i></h4></h4>
+<p class="font-label-md text-label-sm md:text-label-md text-primary">Head of AI Research</p>
+</div>
+</div>
+<!-- Team Member 3 -->
+<div class="group scroll-reveal team-card-interactive active" style="transition-delay: 200ms;">
+<div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 bg-surface-container shadow-sm group-hover:shadow-xl transition-all">
+<img alt="Laksamana (Purn) Budi" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARuZ9gGhpkb3j71qAud40M355VsY8krg7IuL8lrt6ED8qo71sdrS5DHmwznCGwije4ScE_DaHrXVxufn4VWBlVojTc4a9u3NxcBwpRUs7uLTB4zucCr4wnFGNdGwKaF5MlUsNeVHh6wi7KWihrL0cuy8Y5xn50b1GNOLTS28UU11xOyYX__nKQrr_aCVL8DNz6oTeN4XhaeZcDnlyxOYEJSGYg0yMc4F7JXs6ZEKAe0ypuX85EiJAXeDr-Xp6g9bciykpVJj42nSv8PA">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="team-info transition-transform duration-300">
+<h4 class="font-headline-sm text-headline-sm text-on-surface"><h4 class="font-headline-sm text-headline-sm text-on-surface" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(25, 28, 30); outline: none !important; box-shadow: none !important;"><i style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">*hanya sebagai contoh</i></h4></h4>
+<p class="font-label-md text-label-sm md:text-label-md text-primary">Strategic Advisor</p>
+</div>
+</div>
+<!-- Team Member 4 -->
+<div class="group scroll-reveal team-card-interactive active" style="transition-delay: 300ms;">
+<div class="relative overflow-hidden rounded-xl aspect-[3/4] mb-4 bg-surface-container shadow-sm group-hover:shadow-xl transition-all">
+<img alt="Kevin Wijaya" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdRKPwk02X2tu6q9e2IWOWTF4YE9bIKnAkmYGs38EPQi1vFZHGRW02pzEI33XXSZ2SvZc0pmu9Or0bN2uY-EPjozPsoyyteR3uG38QkEtqee6PHPOuEKOdyYH1l5TxsNUqopReRrGNTBYPSjS674oj9ARwop9108Gq2PxcB5JnaRYPlij_ov6oGU0SvzPLDeGbU2Rq0l3BVWaBP42nStpiwopccFOg4xjEGZFPzx9S7ooh7BHiYYJdHJT3oYG4YuQpdDuecJOEZfRZTA">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="team-info transition-transform duration-300">
+<h4 class="font-headline-sm text-headline-sm text-on-surface"><h4 class="font-headline-sm text-headline-sm text-on-surface" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(25, 28, 30); outline: none !important; box-shadow: none !important;"><i style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ;">*hanya sebagai contoh</i></h4></h4>
+<p class="font-label-md text-label-sm md:text-label-md text-primary">Systems Engineer</p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-stack-lg px-gutter">
+<div class="max-w-container-max mx-auto bg-primary rounded-2xl p-8 md:p-12 text-center relative overflow-hidden scroll-reveal shadow-2xl active">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 blur-[100px] rounded-full"></div>
+<h2 class="font-headline-md text-headline-sm md:text-headline-md text-on-primary mb-6 relative z-10">Siap Menguasai Data AIS Bersama Kami?</h2>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-primary/80 mb-10 max-w-2xl mx-auto relative z-10">Jelajahi potensi tak terbatas dari platform AIS berbasis AI kami untuk kedaulatan dan efisiensi operasional laut Anda.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+<a class="bg-white text-primary px-8 md:px-10 py-3 md:py-4 rounded-xl font-bold hover:scale-105 transition-transform inline-block text-center" href="https://wa.me/6285179823945?text=" target="_blank" rel="noopener noreferrer">Hubungi Kami</a>
+<button class="border border-white text-white px-8 md:px-10 py-3 md:py-4 rounded-xl font-bold hover:bg-white/10 transition-colors text-center">Unduh Profil</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container border-t border-outline-variant">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-gutter py-stack-lg max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-4">Segara.AI</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Solusi Kecerdasan AIS Terintegrasi untuk Masa Depan Maritim Global.</p>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest">Navigasi</h5>
+<ul class="space-y-3">
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="index.html">Beranda</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="solusi.html">Solusi</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="teknologi.html">Teknologi</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="tentang-kami.html">Tentang Kami</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest">Legal &amp; Sosial</h5>
+<ul class="space-y-3">
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="terms.html">Terms of Service</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="https://linkedin.com">LinkedIn</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="https://twitter.com">Twitter</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest">Kontak</h5>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Jakarta, Indonesia</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">info@segara.ai</p>
+<div class="mt-4 flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">language</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">mail</span>
+</div>
+</div>
+</div>
+<div class="px-gutter py-8 max-w-container-max mx-auto text-center border-t border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-60">© 2024 Segara.AI. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Mobile Menu Toggle Fix
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const menuCloseBtn = document.getElementById('menu-close');
+        const menuIcon = document.getElementById('menu-icon');
+
+        const openMenu = () => {
+            if (mobileMenu) mobileMenu.classList.add('active');
+            if (mobileOverlay) mobileOverlay.classList.add('active');
+            if (menuIcon) menuIcon.textContent = 'close';
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeMenu = () => {
+            if (mobileMenu) mobileMenu.classList.remove('active');
+            if (mobileOverlay) mobileOverlay.classList.remove('active');
+            if (menuIcon) menuIcon.textContent = 'menu';
+            document.body.style.overflow = '';
+        };
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = mobileMenu ? mobileMenu.classList.contains('active') : false;
+                if (isOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+        }
+
+        if (menuCloseBtn) {
+            menuCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking links
+        if (mobileMenu) {
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMenu();
+                });
+            });
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileMenu && mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Simple Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Smooth Parallax for Hero Section (Disabled on small mobile for performance)
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth > 768) {
+                const scrollPos = window.pageYOffset;
+                const heroParallax = document.getElementById('hero-parallax');
+                if (heroParallax) {
+                    heroParallax.style.transform = `translateY(${scrollPos * 0.15}px)`;
+                }
+            }
+        });
+
+        // Background Interaction
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 1024) {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.002;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.002;
+                
+                const heroParallax = document.getElementById('hero-parallax');
+                if (heroParallax) {
+                    const currentY = window.pageYOffset * 0.15;
+                    heroParallax.style.transform = `translate(${moveX}px, ${currentY + moveY}px)`;
+                }
+            }
+        });
+    </script>
+
+
+</body></html>
+
